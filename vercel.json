@@ -16,7 +16,7 @@
     }
   ],
   "outputDirectory": "public",
-  "buildCommand": "php composer.phar install --no-dev --optimize-autoloader && php artisan optimize && npm install && npm run build",
-  "installCommand": "php composer.phar install --no-dev --optimize-autoloader && npm install",
+  "installCommand": "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && npm install",
+  "buildCommand": "php /usr/local/bin/composer install --no-dev --optimize-autoloader && php artisan optimize && npm run build",
   "devCommand": "php artisan serve"
 }
