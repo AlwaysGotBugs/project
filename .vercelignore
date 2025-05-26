@@ -1,0 +1,6 @@
+/vendor
+/node_modules # if you use npm/yarn for frontend assets
+.env
+.git
+.gitignore
+.vercel

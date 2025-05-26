@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.6.0"
+    }
+  },
+  "routes": [
+    {
+      "src": "/build/(.*)",
+      "dest": "/public/build/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
+    }
+  ],
+  "outputDirectory": "public",
+  "buildCommand": "composer install --no-dev --optimize-autoloader && php artisan optimize && npm install && npm run build",
+  "installCommand": "composer install --no-dev --optimize-autoloader && npm install",
+  "devCommand": "php artisan serve"
+}
