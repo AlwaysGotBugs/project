@@ -6,40 +6,36 @@
 
 <div id="bannerCarousel" class="carousel slide carousel-fade mb-5" data-bs-ride="carousel" data-bs-interval="3500">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        @php
+            $bannerImages = [];
+            $directory = public_path('images/home-banner');
+            if (File::exists($directory)) {
+                $files = File::glob($directory . '/*.{jpg,jpeg,png,gif,webp}', GLOB_BRACE);
+                // Sort files by name for consistent order
+                sort($files);
+                foreach ($files as $filePath) {
+                    $bannerImages[] = basename($filePath);
+                }
+            }
+        @endphp
+        @foreach ($bannerImages as $key => $imageName)
+            <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="{{ $key }}"
+                    class="{{ $key == 0 ? 'active' : '' }}" aria-current="{{ $key == 0 ? 'true' : 'false' }}"
+                    aria-label="Slide {{ $key + 1 }}">
+            </button>
+        @endforeach
     </div>
     <div class="carousel-inner" style="height: 600px;">
-        <div class="carousel-item active">
-            <img src="{{ asset('images/1.jpg') }}" class="d-block w-100 h-100 object-fit-cover" alt="Championship 1">
-            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-                <h3 class="fw-bold text-white">بطولة الجامعة اللبنانية الكبرى 2024</h3>
-                <p class="text-white-50">لحظات لا تُنسى من التميز الرياضي.</p>
+        @foreach ($bannerImages as $key => $imageName)
+            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                <img src="{{ asset('images/home-banner/' . $imageName) }}" class="d-block w-100 h-100 object-fit-cover" alt="Banner Image {{ $key + 1 }}">
+                {{-- You can add dynamic captions here if you have data for them, or remove this div if not needed --}}
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                    <h3 class="fw-bold text-white">عنوان ديناميكي {{ $key + 1 }}</h3>
+                    <p class="text-white-50">وصف ديناميكي هنا.</p>
+                </div>
             </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('images/2.jpg') }}" class="d-block w-100 h-100 object-fit-cover" alt="Championship 2">
-            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-                <h3 class="fw-bold text-white">الروح الرياضية والعمل الجماعي</h3>
-                <p class="text-white-50">نُؤمن بأن الرياضة تجمعنا.</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('images/3.jpg') }}" class="d-block w-100 h-100 object-fit-cover" alt="Championship 3">
-            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-                <h3 class="fw-bold text-white">منشآتنا الحديثة</h3>
-                <p class="text-white-50">مرافق على أعلى مستوى لتدريب وتطوير الأبطال.</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('images/4.jpg') }}" class="d-block w-100 h-100 object-fit-cover" alt="Championship 4">
-            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-                <h3 class="fw-bold text-white">جيل جديد من الرياضيين</h3>
-                <p class="text-white-50">نستثمر في مستقبل الرياضة اللبنانية.</p>
-            </div>
-        </div>
+        @endforeach
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -51,14 +47,139 @@
     </button>
 </div>
 
+
+{{-- جدول المباريات والأنشطة Section --}}
+<div class="container py-5">
+    <h2 class="text-center mb-5" style="color: #129866; font-weight: 700;">
+        جدول المباريات والأنشطة
+    </h2>
+
+    <div class="row justify-content-center">
+
+        {{-- Match Example 1 --}}
+        <div class="col-12 mb-4">
+            <div class="card match-card shadow-sm rounded-3">
+                <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
+                    <div class="team-info d-flex flex-column align-items-center text-center">
+                        <img src="https://via.placeholder.com/60/0000FF/FFFFFF?text=TeamA" alt="Team A Logo" class="team-logo mb-2">
+                        <h5 class="fw-bold mb-0">الفريق الأول</h5>
+                    </div>
+
+                    <div class="match-details text-center mx-md-4 mb-3 mb-md-0">
+                        <div class="text-muted small">
+                            <i class="bi bi-calendar me-1"></i> 2025-06-28
+                            <i class="bi bi-clock me-1 ms-2"></i> 20:00
+                        </div>
+                        <div class="text-muted small">
+                            <i class="bi bi-tv-fill me-1"></i> قناة رياضية 1
+                        </div>
+                        <div class="text-muted small">
+                            <i class="bi bi-geo-alt-fill me-1"></i> ملعب المدينة الرياضية
+                        </div>
+                    </div>
+
+                    <div class="team-info d-flex flex-column align-items-center text-center">
+                        <img src="https://via.placeholder.com/60/FF0000/FFFFFF?text=TeamB" alt="Team B Logo" class="team-logo mb-2">
+                        <h5 class="fw-bold mb-0">الفريق الثاني</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Activity Example 2 --}}
+        <div class="col-12 mb-4">
+            <div class="card match-card shadow-sm rounded-3">
+                <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
+                    <div class="team-info d-flex flex-column align-items-center text-center">
+                        <img src="https://via.placeholder.com/60/FFD700/000000?text=Activity" alt="Activity Icon" class="team-logo mb-2">
+                        <h5 class="fw-bold mb-0">ورشة عمل تدريبية</h5>
+                    </div>
+
+                    <div class="match-details text-center mx-md-4 mb-3 mb-md-0">
+                        <p class="mb-1 text-muted small">تحسين الأداء البدني</p>
+                        <div class="text-muted small">
+                            <i class="bi bi-calendar me-1"></i> 2025-07-05
+                            <i class="bi bi-clock me-1 ms-2"></i> 10:00
+                        </div>
+                        <div class="text-muted small">
+                            <i class="bi bi-geo-alt-fill me-1"></i> قاعة المحاضرات، الجامعة
+                        </div>
+                    </div>
+
+                    <div class="team-info d-flex flex-column align-items-center text-center">
+                        <img src="https://via.placeholder.com/60/00FF00/000000?text=Coach" alt="Coach Icon" class="team-logo mb-2">
+                        <h5 class="fw-bold mb-0">مع المدرب خبير</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Match Example 3 (Completed) --}}
+        <div class="col-12 mb-4">
+            <div class="card match-card shadow-sm rounded-3">
+                <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
+                    <div class="team-info d-flex flex-column align-items-center text-center">
+                        <img src="https://via.placeholder.com/60/800080/FFFFFF?text=TeamC" alt="Team C Logo" class="team-logo mb-2">
+                        <h5 class="fw-bold mb-0">فريق الأمل</h5>
+                    </div>
+
+                    <div class="match-details text-center mx-md-4 mb-3 mb-md-0">
+                        <div class="text-muted small">
+                            <i class="bi bi-calendar me-1"></i> 2025-05-20
+                            <i class="bi bi-clock me-1 ms-2"></i> 17:00
+                        </div>
+                        <div class="text-muted small">
+                            <i class="bi bi-geo-alt-fill me-1"></i> ملعب الجامعة الجديد
+                        </div>
+                    </div>
+
+                    <div class="team-info d-flex flex-column align-items-center text-center">
+                        <img src="https://via.placeholder.com/60/FFA500/FFFFFF?text=TeamD" alt="Team D Logo" class="team-logo mb-2">
+                        <h5 class="fw-bold mb-0">فريق العزيمة</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Activity Example 4 --}}
+        <div class="col-12 mb-4">
+            <div class="card match-card shadow-sm rounded-3">
+                <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
+                    <div class="team-info d-flex flex-column align-items-center text-center">
+                        <img src="https://via.placeholder.com/60/800000/FFFFFF?text=Yoga" alt="Yoga Icon" class="team-logo mb-2">
+                        <h5 class="fw-bold mb-0">حصص يوغا صباحية</h5>
+                    </div>
+
+                    <div class="match-details text-center mx-md-4 mb-3 mb-md-0">
+                        <p class="mb-1 text-muted small">لتحسين التركيز والمرونة</p>
+                        <div class="text-muted small">
+                            <i class="bi bi-calendar me-1"></i> كل ثلاثاء وخميس
+                            <i class="bi bi-clock me-1 ms-2"></i> 07:30
+                        </div>
+                        <div class="text-muted small">
+                            <i class="bi bi-geo-alt-fill me-1"></i> قاعة الأنشطة الرياضية
+                        </div>
+                    </div>
+
+                    <div class="team-info d-flex flex-column align-items-center text-center">
+                        <img src="https://via.placeholder.com/60/008080/FFFFFF?text=Instructor" alt="Instructor Icon" class="team-logo mb-2">
+                        <h5 class="fw-bold mb-0">مع المدربة ليلى</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div class="container-fluid py-5">
     <h2 class="text-center text-primary mb-5 display-4 fw-bold">المنشآت الرياضية</h2>
 
     <div class="row justify-content-center px-2 px-md-0">
-        @for ($i = 1; $i <= 4; $i++)
-        <div class="col-xl-3 col-lg-4 col-md-6 col-12 mb-4 d-flex justify-content-center">
-            <div class="card h-100 shadow-sm border-0 facility-card" onclick="openGallery({{ $i }})">
-                <img src="{{ asset("images/facility{$i}/1.jpg") }}" class="card-img-top" style="height: 300px; object-fit: cover;" alt="Facility {{ $i }}">
+        @for ($i = 1; $i <= 6; $i++)
+        <div class="col-xl-4 col-lg-4 col-md-6 col-12 mb-4 d-flex justify-content-center">
+            <div class="card h-100 shadow-sm border-0 facility-card" onclick="openGallery({{ $i }})" >
+                <img src="{{ asset("images/facility{$i}/1.jpg") }}" class="card-img-top" style="height: 300px;width: 300px; object-fit: cover;" alt="Facility {{ $i }}">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <h5 class="card-title text-center text-dark fw-bold mb-0">المنشأة {{ $i }}</h5>
                     <p class="card-text text-muted text-center mt-2 small">انقر لعرض المعرض</p>
@@ -69,7 +190,67 @@
     </div>
 </div>
 
+
 <style>
+    /* Custom styles for the Match/Activity cards */
+    .match-card {
+        border-radius: 0.75rem; /* More rounded corners */
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .match-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .match-card .team-logo {
+        width: 60px; /* Adjusted size for better alignment */
+        height: 60px; /* Adjusted size for better alignment */
+        object-fit: contain;
+        border-radius: 50%; /* If you want circular logos */
+        border: 1px solid #eee;
+        padding: 5px;
+    }
+
+    /* Important: Ensure logos are always above text and centered within their column */
+    .match-card .team-info {
+        display: flex;
+        flex-direction: column; /* Stack logo above text */
+        align-items: center; /* Center horizontally within the column */
+        text-align: center; /* Ensure text is centered too */
+        width: auto; /* Allow content to dictate width */
+        margin-bottom: 0; /* Reset margin from previous adjustments */
+    }
+
+    .match-card .match-details {
+        flex-grow: 1; /* Allows details section to take available space */
+        max-width: 300px; /* Limit width on larger screens */
+    }
+
+    /* Responsive adjustments for the match card */
+    @media (max-width: 767.98px) {
+        .match-card .card-body {
+            flex-direction: column; /* Stack elements vertically on small screens */
+        }
+        .match-card .team-info {
+            width: 100%; /* Full width for team info on small screens */
+            margin-bottom: 1rem; /* Add space below team info when stacked */
+        }
+        .match-card .team-logo {
+            margin-bottom: 10px; /* Add space below logo when stacked */
+        }
+        .match-card .match-details {
+            width: 100%;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            margin-bottom: 1rem;
+        }
+    }
+
+
+    /* Existing CSS for facility-card and carousel */
     .facility-card {
         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         cursor: pointer;
@@ -104,6 +285,60 @@
         }
         .carousel-caption {
             display: none !important;
+        }
+    }
+
+    /* Footer alignment styles */
+    .footer .col-md-4 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Vertically center content within columns */
+        align-items: center; /* Horizontally center content within columns */
+    }
+
+    /* Override for specific column alignments on medium and larger screens */
+    .footer .col-md-4:first-child {
+        align-items: center; /* Center for mobile */
+    }
+    @media (min-width: 768px) {
+        .footer .col-md-4:first-child {
+            align-items: flex-start; /* Align to start on medium screens */
+            text-align: left;
+        }
+    }
+
+    .footer .col-md-4:last-child {
+        align-items: center; /* Center for mobile */
+    }
+    @media (min-width: 768px) {
+        .footer .col-md-4:last-child {
+            align-items: flex-end; /* Align to end on medium screens */
+            text-align: right;
+        }
+    }
+
+    /* Contact Info list specific alignment */
+    .footer ul.list-unstyled.d-flex.flex-column {
+        width: 100%; /* Ensure the ul takes full width to control alignment */
+    }
+    .footer ul.list-unstyled.d-flex.flex-column li {
+        width: auto; /* Allow li to size to its content */
+    }
+
+    .social-icons-list .social-icon-link {
+        display: inline-flex; /* Use flexbox for vertical alignment */
+        align-items: center; /* Center icon vertically */
+        justify-content: center; /* Center icon horizontally */
+        width: 30px; /* Adjust as needed for consistent size */
+        height: 30px; /* Adjust as needed for consistent size */
+    }
+
+    /* Ensure text alignment within specific columns on medium screens */
+    @media (min-width: 768px) {
+        .footer .col-md-4:nth-child(2) h5,
+        .footer .col-md-4:nth-child(2) ul {
+            text-align: center; /* Center align title and list for the middle column */
+            align-items: center; /* Ensure items inside list are centered too */
         }
     }
 </style>

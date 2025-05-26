@@ -15,3 +15,6 @@ footer a:hover {
 .text-navy {
     color: #003366; /* Navy color */
 }
+body {
+    font-family: 'Tajawal', sans-serif; /* Replace 'Cairo' with 'Tajawal' */
+}
