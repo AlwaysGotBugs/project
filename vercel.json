@@ -16,7 +16,7 @@
     }
   ],
   "outputDirectory": "public",
-  "installCommand": "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && npm install",
-  "buildCommand": "php /usr/local/bin/composer install --no-dev --optimize-autoloader && php artisan optimize && npm run build",
+  "installCommand": "curl -sS https://getcomposer.org/installer | vercel-php/php -- --install-dir=/usr/local/bin --filename=composer && npm install",
+  "buildCommand": "vercel-php/php /usr/local/bin/composer install --no-dev --optimize-autoloader && php artisan optimize && npm run build",
   "devCommand": "php artisan serve"
 }
