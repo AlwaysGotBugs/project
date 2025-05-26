@@ -1,0 +1,17 @@
+@import 'bootstrap/dist/css/bootstrap.rtl.min.css';
+/* resources/css/app.css */
+footer {
+  transition: all 0.3s ease-in-out;
+}
+
+footer a {
+  transition: color 0.3s ease-in-out;
+}
+
+footer a:hover {
+  color: #f8f9fa;
+}
+
+.text-navy {
+    color: #003366; /* Navy color */
+}
