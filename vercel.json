@@ -16,7 +16,7 @@
     }
   ],
   "outputDirectory": "public",
-  "buildCommand": "composer install --no-dev --optimize-autoloader && php artisan optimize && npm install && npm run build",
-  "installCommand": "composer install --no-dev --optimize-autoloader && npm install",
+  "buildCommand": "/usr/local/bin/composer install --no-dev --optimize-autoloader && php artisan optimize && npm install && npm run build",
+  "installCommand": "/usr/local/bin/composer install --no-dev --optimize-autoloader && npm install",
   "devCommand": "php artisan serve"
 }
