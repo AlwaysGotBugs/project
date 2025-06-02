@@ -61,7 +61,6 @@
             <div class="card match-card shadow-sm rounded-3">
                 <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <img src="https://via.placeholder.com/60/0000FF/FFFFFF?text=TeamA" alt="Team A Logo" class="team-logo mb-2">
                         <h5 class="fw-bold mb-0">الفريق الأول</h5>
                     </div>
 
@@ -79,7 +78,6 @@
                     </div>
 
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <img src="https://via.placeholder.com/60/FF0000/FFFFFF?text=TeamB" alt="Team B Logo" class="team-logo mb-2">
                         <h5 class="fw-bold mb-0">الفريق الثاني</h5>
                     </div>
                 </div>
@@ -91,7 +89,6 @@
             <div class="card match-card shadow-sm rounded-3">
                 <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <img src="https://via.placeholder.com/60/FFD700/000000?text=Activity" alt="Activity Icon" class="team-logo mb-2">
                         <h5 class="fw-bold mb-0">ورشة عمل تدريبية</h5>
                     </div>
 
@@ -107,7 +104,6 @@
                     </div>
 
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <img src="https://via.placeholder.com/60/00FF00/000000?text=Coach" alt="Coach Icon" class="team-logo mb-2">
                         <h5 class="fw-bold mb-0">مع المدرب خبير</h5>
                     </div>
                 </div>
@@ -119,7 +115,6 @@
             <div class="card match-card shadow-sm rounded-3">
                 <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <img src="https://via.placeholder.com/60/800080/FFFFFF?text=TeamC" alt="Team C Logo" class="team-logo mb-2">
                         <h5 class="fw-bold mb-0">فريق الأمل</h5>
                     </div>
 
@@ -134,7 +129,6 @@
                     </div>
 
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <img src="https://via.placeholder.com/60/FFA500/FFFFFF?text=TeamD" alt="Team D Logo" class="team-logo mb-2">
                         <h5 class="fw-bold mb-0">فريق العزيمة</h5>
                     </div>
                 </div>
@@ -146,7 +140,6 @@
             <div class="card match-card shadow-sm rounded-3">
                 <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <img src="https://via.placeholder.com/60/800000/FFFFFF?text=Yoga" alt="Yoga Icon" class="team-logo mb-2">
                         <h5 class="fw-bold mb-0">حصص يوغا صباحية</h5>
                     </div>
 
@@ -162,7 +155,6 @@
                     </div>
 
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <img src="https://via.placeholder.com/60/008080/FFFFFF?text=Instructor" alt="Instructor Icon" class="team-logo mb-2">
                         <h5 class="fw-bold mb-0">مع المدربة ليلى</h5>
                     </div>
                 </div>
@@ -178,11 +170,15 @@
     <div class="row justify-content-center px-2 px-md-0">
         @for ($i = 1; $i <= 6; $i++)
         <div class="col-xl-4 col-lg-4 col-md-6 col-12 mb-4 d-flex justify-content-center">
-            <div class="card h-100 shadow-sm border-0 facility-card" onclick="openGallery({{ $i }})" >
+            {{-- REMOVED onclick="openGallery({{ $i }})" --}}
+            <div class="card h-100 shadow-sm border-0 facility-card">
                 <img src="{{ asset("images/facility{$i}/1.jpg") }}" class="card-img-top" style="height: 300px;width: 300px; object-fit: cover;" alt="Facility {{ $i }}">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <h5 class="card-title text-center text-dark fw-bold mb-0">المنشأة {{ $i }}</h5>
-                    <p class="card-text text-muted text-center mt-2 small">انقر لعرض المعرض</p>
+                    {{-- REMOVED or MODIFIED the text --}}
+                    {{-- <p class="card-text text-muted text-center mt-2 small">انقر لعرض المعرض</p> --}}
+                    {{-- You can add a brief description here if you want --}}
+                    <p class="card-text text-muted text-center mt-2 small">صورة للمنشأة {{ $i }}</p>
                 </div>
             </div>
         </div>
@@ -192,7 +188,17 @@
 
 
 <style>
-    /* Custom styles for the Match/Activity cards */
+    .facility-card {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* KEEP THIS */
+        /* cursor: pointer; -- REMOVE THIS LINE IF IT'S STILL THERE */
+    }
+    .facility-card:hover {
+        transform: translateY(-5px); /* KEEP THIS */
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* KEEP THIS */
+    }
+    .facility-card .card-img-top {
+        border-bottom: 3px solid #007bff;
+    }
     .match-card {
         border-radius: 0.75rem; /* More rounded corners */
         background-color: #fff;
@@ -252,12 +258,13 @@
 
     /* Existing CSS for facility-card and carousel */
     .facility-card {
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        cursor: pointer;
+        /* REMOVED transition, cursor, and hover effects related to clickability */
+        /* If you still want a slight visual effect on hover, you can add a subtle box-shadow */
+        transition: box-shadow 0.3s ease-in-out; /* Keep a subtle transition for shadow */
     }
     .facility-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.08) !important; /* Lighter shadow on hover */
+        /* REMOVED transform: translateY(-5px); */
     }
     .facility-card .card-img-top {
         border-bottom: 3px solid #007bff;
@@ -343,6 +350,8 @@
     }
 </style>
 
+{{-- REMOVED the galleryModal HTML completely --}}
+{{--
 <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
@@ -356,33 +365,20 @@
         </div>
     </div>
 </div>
+--}}
 
+{{-- REMOVED the entire script block containing openGallery function --}}
+{{--
 <script>
     const facilityImages = {
         1: @json(array_map('basename', glob(public_path('images/facility1/*.jpg')))),
-        2: @json(array_map('basename', glob(public_path('images/facility2/*.jpg')))),
-        3: @json(array_map('basename', glob(public_path('images/facility3/*.jpg')))),
-        4: @json(array_map('basename', glob(public_path('images/facility4/*.jpg'))))
+        // ... (and so on for other facility images)
     };
 
     function openGallery(facilityNumber) {
-        const gallery = document.getElementById('galleryContent');
-        gallery.innerHTML = '';
-
-        const images = facilityImages[facilityNumber];
-        images.forEach(fileName => {
-            const img = document.createElement('img');
-            img.src = `/images/facility${facilityNumber}/${fileName}`;
-            img.classList.add('img-thumbnail', 'shadow-sm');
-            img.style.height = '250px';
-            img.style.objectFit = 'cover';
-            img.style.flexShrink = '0';
-            gallery.appendChild(img);
-        });
-
-        const modal = new bootstrap.Modal(document.getElementById('galleryModal'));
-        modal.show();
+        // ... (function logic)
     }
 </script>
+--}}
 
 @endsection
