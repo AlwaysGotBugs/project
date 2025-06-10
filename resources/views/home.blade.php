@@ -1,3 +1,14 @@
+<style>
+    .home-banner-image {
+        height: 800px !important;
+    }
+
+    @media (max-width: 768px) {
+        .home-banner-image {
+            height: auto !important;
+        }
+    }
+</style>
 @extends('layouts.app')
 
 @section('title', 'الصفحة الرئيسية')
@@ -25,15 +36,10 @@
             </button>
         @endforeach
     </div>
-    <div class="carousel-inner" style="height: 600px;">
+    <div class="carousel-inner" >
         @foreach ($bannerImages as $key => $imageName)
             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                <img src="{{ asset('images/home-banner/' . $imageName) }}" class="d-block w-100 h-100 object-fit-cover" alt="Banner Image {{ $key + 1 }}">
-                {{-- You can add dynamic captions here if you have data for them, or remove this div if not needed --}}
-                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-                    <h3 class="fw-bold text-white">عنوان ديناميكي {{ $key + 1 }}</h3>
-                    <p class="text-white-50">وصف ديناميكي هنا.</p>
-                </div>
+                <img src="{{ asset('images/home-banner/' . $imageName) }}" class="d-block w-100 home-banner-image " alt="Banner Image {{ $key + 1 }}">
             </div>
         @endforeach
     </div>
@@ -61,7 +67,7 @@
             <div class="card match-card shadow-sm rounded-3">
                 <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <h5 class="fw-bold mb-0">الفريق الأول</h5>
+                        <h5 class="fw-bold mb-0"> الجامعة اللبنانية </h5>
                     </div>
 
                     <div class="match-details text-center mx-md-4 mb-3 mb-md-0">
@@ -78,7 +84,7 @@
                     </div>
 
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <h5 class="fw-bold mb-0">الفريق الثاني</h5>
+                        <h5 class="fw-bold mb-0">LAU جامعة</h5>
                     </div>
                 </div>
             </div>
@@ -89,22 +95,22 @@
             <div class="card match-card shadow-sm rounded-3">
                 <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <h5 class="fw-bold mb-0">ورشة عمل تدريبية</h5>
+                        <h5 class="fw-bold mb-0"> الجامعة اللبنانية  </h5>
                     </div>
 
                     <div class="match-details text-center mx-md-4 mb-3 mb-md-0">
-                        <p class="mb-1 text-muted small">تحسين الأداء البدني</p>
+                        <p class="mb-1 text-muted small">شطرنج</p>
                         <div class="text-muted small">
                             <i class="bi bi-calendar me-1"></i> 2025-07-05
                             <i class="bi bi-clock me-1 ms-2"></i> 10:00
                         </div>
                         <div class="text-muted small">
-                            <i class="bi bi-geo-alt-fill me-1"></i> قاعة المحاضرات، الجامعة
+                            <i class="bi bi-geo-alt-fill me-1"></i> قاعة الشطرنج
                         </div>
                     </div>
 
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <h5 class="fw-bold mb-0">مع المدرب خبير</h5>
+                        <h5 class="fw-bold mb-0"> المدرب حسن</h5>
                     </div>
                 </div>
             </div>
@@ -115,10 +121,11 @@
             <div class="card match-card shadow-sm rounded-3">
                 <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <h5 class="fw-bold mb-0">فريق الأمل</h5>
+                        <h5 class="fw-bold mb-0"> الجامعة اللبنانية </h5>
                     </div>
 
                     <div class="match-details text-center mx-md-4 mb-3 mb-md-0">
+
                         <div class="text-muted small">
                             <i class="bi bi-calendar me-1"></i> 2025-05-20
                             <i class="bi bi-clock me-1 ms-2"></i> 17:00
@@ -129,7 +136,7 @@
                     </div>
 
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <h5 class="fw-bold mb-0">فريق العزيمة</h5>
+                        <h5 class="fw-bold mb-0">فريق MU</h5>
                     </div>
                 </div>
             </div>
@@ -140,11 +147,10 @@
             <div class="card match-card shadow-sm rounded-3">
                 <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <h5 class="fw-bold mb-0">حصص يوغا صباحية</h5>
+                        <h5 class="fw-bold mb-0">حصص  سباحة</h5>
                     </div>
 
                     <div class="match-details text-center mx-md-4 mb-3 mb-md-0">
-                        <p class="mb-1 text-muted small">لتحسين التركيز والمرونة</p>
                         <div class="text-muted small">
                             <i class="bi bi-calendar me-1"></i> كل ثلاثاء وخميس
                             <i class="bi bi-clock me-1 ms-2"></i> 07:30
@@ -155,7 +161,7 @@
                     </div>
 
                     <div class="team-info d-flex flex-column align-items-center text-center">
-                        <h5 class="fw-bold mb-0">مع المدربة ليلى</h5>
+                        <h5 class="fw-bold mb-0"> المدربة علي</h5>
                     </div>
                 </div>
             </div>
